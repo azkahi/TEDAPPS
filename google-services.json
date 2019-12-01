@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1095536142285",
+    "firebase_url": "https://tedfest-telkomsel.firebaseio.com",
+    "project_id": "tedfest-telkomsel",
+    "storage_bucket": "tedfest-telkomsel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095536142285:android:74d9b6eaddc1027cac8684",
+        "android_client_info": {
+          "package_name": "org.hcmtsel.tedfest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095536142285-83qnempvtpebcr3t6d7ok1puaiore98h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxvv9RNF6JiwOlW01WguiJXC9qGy7Bp6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1095536142285-83qnempvtpebcr3t6d7ok1puaiore98h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1095536142285-ne3mt1okc62djk224ltvp8q4946uqfak.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.hcmtsel.tedfest"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

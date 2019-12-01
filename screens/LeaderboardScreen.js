@@ -1,0 +1,128 @@
+import React from 'react';
+import { ScrollView, StyleSheet, View, ImageBackground, Dimensions, Text } from 'react-native';
+import { Block, theme } from "galio-framework";
+import TopBarNav from 'top-bar-nav';
+
+import Colors from '../constants/Colors';
+import Leaderboard from '../components/Leaderboard';
+
+const { width, height } = Dimensions.get("screen");
+
+const Scene = ({ index }) => (
+  <View style={{flex: 1}}>
+    <Block flex center>
+      <ImageBackground
+        source={index == 0 ? require("../assets/images/bg.png") : require("../assets/images/register-bg.png")}
+        style={{ height, width, zIndex: 1 }}
+      />
+    </Block>
+
+    <View style={styles.profileCard}>
+      <Leaderboard
+        data={this.state.data}
+        sortBy='highScore'
+        labelBy='userName'
+        oddRowColor={Colors.tintColor}
+        evenRowColor={Colors.secondaryColor}
+        rankStyle={{color: 'white'}}
+        labelStyle={{color: 'white'}}
+        scoreStyle={{color: 'white'}}
+        containerStyle={styles.leaderboardContainer}
+        />
+    </View>
+  </View>
+);
+
+const ROUTES = {
+	Scene
+};
+
+const ROUTESTACK = [
+  { element: <Text style={{ fontSize: 14, color: 'white', backgroundColor: Colors.secondaryColor, paddingHorizontal: 5 }}>Data Science</Text>, title: 'Scene' },
+  { element: <Text style={{ fontSize: 14, color: 'white', backgroundColor: Colors.secondaryColor, paddingHorizontal: 5 }}>UI/UX</Text>, title: 'Scene' },
+];
+
+export default function LeaderboardScreen() {
+  this.state = {
+    data: [
+        {userName: 'joe@gmail.com', highScore: 52},
+        {userName: 'jenny@gmail.com', highScore: 120},
+        {userName: 'joe@gmail.com', highScore: 52},
+        {userName: 'jenny@gmail.com', highScore: 120},
+        {userName: 'joe@gmail.com', highScore: 52},
+        {userName: 'jenny@gmail.com', highScore: 120},
+        {userName: 'joe@gmail.com', highScore: 52},
+        {userName: 'jenny@gmail.com', highScore: 120},
+        {userName: 'joe@gmail.com', highScore: 52},
+        {userName: 'jenny@gmail.com', highScore: 120},
+        {userName: 'joe@gmail.com', highScore: 52},
+        {userName: 'jenny@gmail.com', highScore: 120},
+    ]
+  }
+
+  return (
+    <View style={styles.container}>
+        <TopBarNav
+          // routeStack and renderScene are required props
+          routeStack={ROUTESTACK}
+          renderScene={(route, i) => {
+            // This is a lot like the now deprecated Navigator component
+            let Component = ROUTES[route.title];
+            return <Component index={i} />;
+          }}
+          // Below are optional props
+          headerStyle={[styles.headerStyle, { paddingTop: 60 }]} // probably want to add paddingTop if using TopBarNav for the  entire height of screen to account for notches/status bars
+          labelStyle={styles.labelStyle}
+          underlineStyle={styles.underlineStyle}
+          sidePadding={40} // Can't set sidePadding in headerStyle because it's needed to calculate the width of the tabs
+          inactiveOpacity={1}
+          fadeLabels={true}
+        />
+    </View>
+  );
+}
+
+LeaderboardScreen.navigationOptions = {
+  header: null,
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  profileCard: {
+    marginHorizontal: theme.SIZES.BASE,
+    marginTop: 30,
+    marginBottom: 30,
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: Colors.mainBackgroundColor,
+    backgroundColor: Colors.mainBackgroundColor,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 8,
+    shadowOpacity: 0.2,
+    zIndex: 2
+  },
+  leaderboardContainer: {
+    borderColor: Colors.mainBackgroundColor,
+    borderWidth: 0,
+    borderRadius: 0
+  },
+  headerStyle: {
+		borderBottomWidth: 1,
+		borderColor: Colors.tintColor,
+		backgroundColor: Colors.primaryColor
+	},
+	labelStyle: {
+		fontSize: 15,
+		fontWeight: '500',
+		color: Colors.secondaryColor
+	},
+	underlineStyle: {
+		height: 3.6,
+		backgroundColor: Colors.tintColor,
+		width: 40
+	},
+});
