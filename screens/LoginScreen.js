@@ -35,7 +35,7 @@ export default class LoginScreen extends React.Component {
   }
 
   goToHome = () => {
-    this.props.navigation.navigate('Main');
+    this.props.navigation.navigate('Register');
   }
 
   render() {

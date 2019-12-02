@@ -75,17 +75,28 @@ export default class ClassScreen extends React.Component {
   renderItem = (item) => {
     const { textColor } = this.state;
 
-    return(
-      <TouchableOpacity style={{ alignItems: 'center', marginBottom: 20 }} onPress={() => this.goToPerson(item)}>
+    if (People[item]) {
+      return(
+        <TouchableOpacity style={{ alignItems: 'center', marginBottom: 20 }} onPress={() => this.goToPerson(item)}>
+          <Image
+            source={People[item].image}
+            resizeMode= 'center'
+            style={{ width: 80, height: 80, borderRadius: 160 }}
+          />
+          <Text style={[styles.titleText, {fontSize: 16, color: textColor}]}>{item}</Text>
+          <Text style={[styles.contentText, {fontSize: 12, margin: 0, color: textColor}]}>{People[item].title}</Text>
+        </TouchableOpacity>
+      );
+    } else {
+      <TouchableOpacity disabled style={{ alignItems: 'center', marginBottom: 20 }} onPress={() => this.goToPerson(item)}>
         <Image
-          source={People[item].image}
+          source={require('../assets/images/LogoTelkomsel.jpg')}
           resizeMode= 'center'
           style={{ width: 80, height: 80, borderRadius: 160 }}
         />
         <Text style={[styles.titleText, {fontSize: 16, color: textColor}]}>{item}</Text>
-        <Text style={[styles.contentText, {fontSize: 12, margin: 0, color: textColor}]}>{People[item].title}</Text>
       </TouchableOpacity>
-    );
+    }
   }
 
   render() {

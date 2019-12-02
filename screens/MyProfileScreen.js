@@ -10,9 +10,13 @@ import {
   View,
   FlatList,
   TouchableOpacity,
-  Text
+  Text,
+  AsyncStorage,
+  Alert,
+  RefreshControl
 } from "react-native";
 import { Block, theme } from "galio-framework";
+import axios from 'axios';
 
 import Loading from '../components/Loading';
 import Card from '../components/Card';
@@ -39,49 +43,98 @@ class MyProfile extends React.Component {
     super(props);
 
     this.state = {
-      loading: true
+      loading: true,
+      user: {},
+      classes: [],
+      refreshing: false
     };
+  }
+
+  async requestClassData(user) {
+    console.log(user);
+
+    try {
+      await axios({
+        method: 'post',
+        url: 'https://pacific-bastion-26155.herokuapp.com/session_get',
+        data: {
+          id: user.id
+        }
+      })
+      .then(async (response) => {
+        console.log(response.data);
+        this.setState({ loading: false, refreshing: false });
+        this.setState({ classes: response.data });
+      })
+      .catch((error) => {
+        this.setState({ loading: false, refreshing: false });
+        Alert.alert(
+          'ERROR',
+          error.toString(),
+          [
+            { text: 'OK' },
+          ],
+          { cancelable: true }
+        );
+      })
+
+    } catch (error) {
+      this.setState({ loading: false, refreshing: false });
+      Alert.alert(
+        'ERROR',
+        error.toString(),
+        [
+          { text: 'OK' },
+        ],
+        { cancelable: true }
+      );
+    }
   }
 
   async componentDidMount() {
     await loadFontAsync();
-    this.setState({ loading: false });
+
+    const user = JSON.parse(await AsyncStorage.getItem('user'));
+
+    this.requestClassData(user);
+
+    this.setState({ user });
   }
 
   goToScanQR() {
     this.props.navigation.navigate('QRScanner');
   }
 
-  renderBadges(item) {
-    if (item.active) {
+  onRefresh() {
+    this.setState({ refreshing: true });
+    this.requestClassData(this.state.user);
+  }
+
+  renderCardClass(classItem) {
+    const { classes } = this.state;
+
+    let isAttended = false;
+
+    classes.map((classData) => {
+      if (classData.key == classItem.key) {
+        isAttended = true;
+      }
+    });
+
+    if (isAttended) {
       return (
-        <Block style={{margin: 10}}>
-            <Image
-              source={item.src}
-              resizeMode="cover"
-              style={[styles.thumb]}
-            />
-        </Block>
+        <Card item={classItem} key={classItem.key} horizontal ctaDisabled disabled />
       );
     } else {
       return (
-        <Block style={{margin: 10}}>
-            <Image
-              source={item.src}
-              resizeMode="cover"
-              style={[styles.thumb, {tintColor: 'gray'}]}
-            />
-            <Image
-              source={item.src}
-              resizeMode="cover"
-              style={[styles.thumb, { position: 'absolute', opacity: 0.3}]}
-            />
-        </Block>
+        <Card item={classItem} key={classItem.key} horizontal ctaDisabled disabled disabledImage />
       );
     }
   }
 
   render() {
+    const { user, classes, refreshing } = this.state;
+
     if (this.state.loading) {
       return (<Loading />);
     } else {
@@ -93,17 +146,22 @@ class MyProfile extends React.Component {
               style={{ height, width, zIndex: 1 }}
             />
           </Block>
-          <ScrollView showsVerticalScrollIndicator={false} style={{zIndex: 2}}>
+          <ScrollView
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={() => this.onRefresh()} />
+            }
+            showsVerticalScrollIndicator={false}
+            style={{zIndex: 2}}>
                 <View style={styles.profileCard}>
                     <Block middle style={styles.nameInfo}>
                       <Text style={{fontFamily: 'UniviaPro-Bold', fontSize: 28, color: Colors.primaryColor}}>
-                        Jessica Jones
+                        {user.name}
                       </Text>
                     </Block>
                     <Block middle style={{marginTop: 20}}>
                       <Block middle>
                         <Text style={{ fontFamily: 'UniviaPro-Bold', color: Colors.tintColor, fontSize: 16, marginBottom: 4 }}>
-                          0
+                          {classes.length}
                         </Text>
                         <Text color={Colors.primaryColor} style={{ fontFamily: 'UniviaPro-Black', color: Colors.primaryColor, fontSize: 16 }} size={16}>Class Attended</Text>
                       </Block>
@@ -131,7 +189,7 @@ class MyProfile extends React.Component {
 
                     <View style={{ flex: 1, marginHorizontal: 20 }}>
                       <ScrollView>
-                        { classList.map((classes) => (classes.map((classItem) => (<Card item={classItem} key={classItem.key} horizontal ctaDisabled disabled disabledImage />)))) }
+                        { classList.map((classes) => (classes.map((classItem) => (this.renderCardClass(classItem))))) }
                       </ScrollView>
                     </View>
 

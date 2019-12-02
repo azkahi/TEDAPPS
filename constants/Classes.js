@@ -161,7 +161,7 @@ export const classesDay2 = [
     moderator: [],
     moderatorTitle: [],
     speaker: ['Digital Product Sales Jawa Bali Team'],
-    speakerTitle: ['-'],
+    speakerTitle: ['Telkomsel'],
     classImg: require('../assets/images/class3.png'),
     textColor: 'white',
     bgCta: Colors.class2,

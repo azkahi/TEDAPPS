@@ -12,10 +12,10 @@ import {
   StatusBar,
   FlatList,
   Picker,
-  Button
+  Alert
 } from 'react-native';
 import TopBarNav from 'top-bar-nav';
-import { Block, theme } from 'galio-framework';
+import { Button, Block, theme } from 'galio-framework';
 
 import Card from '../components/Card';
 import Colors from '../constants/Colors';
@@ -94,8 +94,8 @@ export default class TEDCastScreen extends React.Component {
                 color={Colors.tintColor}
                 onPress={() => this.startTEDCast()}
                 textStyle={styles.buttonText}
-                title='Register'
               >
+                BEGIN!
               </Button>
 
 
@@ -165,6 +165,8 @@ const styles = StyleSheet.create({
     textAlign: 'left'
   },
   button: {
+    padding: 10,
+    marginBottom: 15
   },
   buttonText: {
     color: 'white',
