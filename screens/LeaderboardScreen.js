@@ -1,85 +1,130 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, ImageBackground, Dimensions, Text } from 'react-native';
+import { ScrollView, StyleSheet, View, ImageBackground, Dimensions, Text, Alert } from 'react-native';
 import { Block, theme } from "galio-framework";
 import TopBarNav from 'top-bar-nav';
+import axios from 'axios';
 
 import Colors from '../constants/Colors';
 import Leaderboard from '../components/Leaderboard';
 
 const { width, height } = Dimensions.get("screen");
 
-const Scene = ({ index }) => (
-  <View style={{flex: 1}}>
-    <Block flex center>
-      <ImageBackground
-        source={index == 0 ? require("../assets/images/bg.png") : require("../assets/images/register-bg.png")}
-        style={{ height, width, zIndex: 1 }}
-      />
-    </Block>
-
-    <View style={styles.profileCard}>
-      <Leaderboard
-        data={this.state.data}
-        sortBy='highScore'
-        labelBy='userName'
-        oddRowColor={Colors.tintColor}
-        evenRowColor={Colors.secondaryColor}
-        rankStyle={{color: 'white'}}
-        labelStyle={{color: 'white'}}
-        scoreStyle={{color: 'white'}}
-        containerStyle={styles.leaderboardContainer}
-        />
-    </View>
-  </View>
-);
-
-const ROUTES = {
-	Scene
-};
+import Loading from '../components/Loading';
 
 const ROUTESTACK = [
   { element: <Text style={{ fontSize: 14, color: 'white', backgroundColor: Colors.secondaryColor, paddingHorizontal: 5 }}>Data Science</Text>, title: 'Scene' },
   { element: <Text style={{ fontSize: 14, color: 'white', backgroundColor: Colors.secondaryColor, paddingHorizontal: 5 }}>UI/UX</Text>, title: 'Scene' },
 ];
 
-export default function LeaderboardScreen() {
-  this.state = {
-    data: [
+export default class LeaderboardScreen extends React.Component {
+  state = {
+    'DS': [
         {userName: 'joe@gmail.com', highScore: 52},
         {userName: 'jenny@gmail.com', highScore: 120},
-        {userName: 'joe@gmail.com', highScore: 52},
-        {userName: 'jenny@gmail.com', highScore: 120},
-        {userName: 'joe@gmail.com', highScore: 52},
-        {userName: 'jenny@gmail.com', highScore: 120},
-        {userName: 'joe@gmail.com', highScore: 52},
-        {userName: 'jenny@gmail.com', highScore: 120},
-        {userName: 'joe@gmail.com', highScore: 52},
-        {userName: 'jenny@gmail.com', highScore: 120},
-        {userName: 'joe@gmail.com', highScore: 52},
-        {userName: 'jenny@gmail.com', highScore: 120},
-    ]
+    ],
+    'UI/UX': [
+      {userName: 'joe@gmail.com', highScore: 52},
+      {userName: 'jenny@gmail.com', highScore: 120},
+    ],
+    loading: true
   }
 
-  return (
-    <View style={styles.container}>
-        <TopBarNav
-          // routeStack and renderScene are required props
-          routeStack={ROUTESTACK}
-          renderScene={(route, i) => {
-            // This is a lot like the now deprecated Navigator component
-            let Component = ROUTES[route.title];
-            return <Component index={i} />;
-          }}
-          // Below are optional props
-          headerStyle={[styles.headerStyle, { paddingTop: 60 }]} // probably want to add paddingTop if using TopBarNav for the  entire height of screen to account for notches/status bars
-          labelStyle={styles.labelStyle}
-          underlineStyle={styles.underlineStyle}
-          sidePadding={40} // Can't set sidePadding in headerStyle because it's needed to calculate the width of the tabs
-          inactiveOpacity={1}
-          fadeLabels={true}
+  getScoreData = async (type) => {
+    try {
+      await axios({
+        method: 'post',
+        url: 'https://pacific-bastion-26155.herokuapp.com/show_score',
+        data: {
+          score_type: type
+        }
+      })
+      .then(async (response) => {
+        console.log(response.data);
+        this.setState({ loading: false, refreshing: false });
+        this.setState({ [type]: response.data });
+      })
+      .catch((error) => {
+        this.setState({ loading: false, refreshing: false });
+        Alert.alert(
+          'ERROR',
+          error.toString(),
+          [
+            { text: 'OK' },
+          ],
+          { cancelable: true }
+        );
+      })
+
+    } catch (error) {
+      this.setState({ loading: false, refreshing: false });
+      Alert.alert(
+        'ERROR',
+        error.toString(),
+        [
+          { text: 'OK' },
+        ],
+        { cancelable: true }
+      );
+    }
+  }
+
+  componentDidMount = async () => {
+    await this.getScoreData('UI/UX');
+    await this.getScoreData('DS');
+    this.setState({ loading: false });
+  }
+
+   renderScene = (index) => (
+    <View style={{flex: 1}}>
+      <Block flex center>
+        <ImageBackground
+          source={index == 0 ? require("../assets/images/bg.png") : require("../assets/images/register-bg.png")}
+          style={{ height, width, zIndex: 1 }}
         />
+      </Block>
+
+      <View style={styles.profileCard}>
+        <Leaderboard
+          data={index == 0 ? this.state['UI/UX'] : this.state['DS']}
+          sortBy='score'
+          labelBy='username'
+          oddRowColor={Colors.tintColor}
+          evenRowColor={Colors.secondaryColor}
+          rankStyle={{color: 'white'}}
+          labelStyle={{color: 'white'}}
+          scoreStyle={{color: 'white'}}
+          sort={(item) => item}
+          containerStyle={styles.leaderboardContainer}
+          />
+      </View>
     </View>
   );
+
+  render() {
+    return (
+      <>
+        { this.state.loading ? <Loading /> :
+          <View style={styles.container}>
+              <TopBarNav
+                // routeStack and renderScene are required props
+                routeStack={ROUTESTACK}
+                renderScene={(route, i) => {
+                  // This is a lot like the now deprecated Navigator component
+                  return this.renderScene(i);
+                }}
+                // Below are optional props
+                headerStyle={[styles.headerStyle, { paddingTop: 60 }]} // probably want to add paddingTop if using TopBarNav for the  entire height of screen to account for notches/status bars
+                labelStyle={styles.labelStyle}
+                underlineStyle={styles.underlineStyle}
+                sidePadding={40} // Can't set sidePadding in headerStyle because it's needed to calculate the width of the tabs
+                inactiveOpacity={1}
+                fadeLabels={true}
+              />
+          </View>
+      }
+    </>
+    );
+  }
 }
 
 LeaderboardScreen.navigationOptions = {

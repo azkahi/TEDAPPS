@@ -14,6 +14,7 @@ import {
   Picker,
   Alert
 } from 'react-native';
+import { Linking } from 'expo';
 import TopBarNav from 'top-bar-nav';
 import { Button, Block, theme } from 'galio-framework';
 
@@ -56,7 +57,16 @@ export default class TEDCastScreen extends React.Component {
         { cancelable: true }
       );
     } else {
+      switch (expertise) {
+        case 'UI/UX':
+          Linking.openURL('https://forms.gle/WCv3VGKK5ZAMpKCf8');
+          break;
+        case 'Data Science':
+          Linking.openURL('https://forms.gle/93LHsYdYccxboR4i6');
+          break;
+        default:
 
+      }
     }
   }
 

@@ -10,13 +10,18 @@ import {
   ViewPropTypes
 } from "react-native";
 
+import Loading from '../components/Loading';
+
+import { loadFontAsync } from '../utils/helper';
+
 const oddRowColor = "white";
 const evenRowColor = "#f2f5f7";
 
 export default class Leaderboard extends Component {
   state = {
     sortedData: [],
-    prevData: null
+    prevData: null,
+    loading: true
   };
 
   static propTypes = {
@@ -70,7 +75,7 @@ export default class Leaderboard extends Component {
           </Text>
         </View>
         <Text style={[styles.score, this.props.scoreStyle]}>
-          {item[sortBy] || 0}
+          { item.score_type == 'UI/UX' ? `${item[sortBy]} (${item.time.toFixed(1)} s)` : item[sortBy] || 0}
         </Text>
       </View>
     );
@@ -90,9 +95,12 @@ export default class Leaderboard extends Component {
       : this.defaultRenderItem(item, index);
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { data, sortBy, sort } = this.props;
     this.setState({ sortedData: _sort(data, sortBy, sort) });
+
+    await loadFontAsync();
+    this.setState({ loading: false });
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -107,15 +115,19 @@ export default class Leaderboard extends Component {
   }
 
   render() {
-    const { sortedData } = this.state;
+    const { sortedData, loading } = this.state;
 
-    return (
-      <FlatList
-        data={sortedData}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={data => this.renderItem(data)}
-      />
-    );
+    if (loading) {
+      return <Loading />;
+    } else {
+      return (
+        <FlatList
+          data={sortedData}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={data => this.renderItem(data)}
+        />
+      );
+    }
   }
 }
 
@@ -136,7 +148,7 @@ const styles = StyleSheet.create({
   },
   rank: {
     fontSize: 17,
-    fontWeight: "bold",
+    fontFamily: 'UniviaPro-Bold',
     marginRight: 5
   },
   singleDidget: {
@@ -149,12 +161,13 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 17,
+    fontFamily: 'UniviaPro-Black',
     flex: 1,
     paddingRight: 80
   },
   score: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontFamily: 'UniviaPro-Bold',
     position: "absolute",
     right: 15,
     paddingLeft: 15

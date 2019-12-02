@@ -51,7 +51,6 @@ class MyProfile extends React.Component {
   }
 
   async requestClassData(user) {
-    console.log(user);
 
     try {
       await axios({
