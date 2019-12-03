@@ -100,7 +100,7 @@ class PersonScreen extends React.Component {
                         <Image
                           source={People[personName].image}
                           resizeMode='contain'
-                          style={{ width: 80, height: 80, borderRadius: 160 }}
+                          style={{ width: 80, height: 80, marginVertical: 10 }}
                         />
                       </TouchableOpacity>
                       <Text style={{fontFamily: 'UniviaPro-Bold', fontSize: 28, color: Colors.primaryColor, textAlign: 'center'}}>

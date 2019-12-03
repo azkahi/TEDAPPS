@@ -81,7 +81,7 @@ export default class ClassScreen extends React.Component {
           <Image
             source={People[item].image}
             resizeMode= 'contain'
-            style={{ width: 80, height: 80, borderRadius: 160 }}
+            style={{ width: 80, height: 80, marginVertical: 10 }}
           />
           <Text style={[styles.titleText, {fontSize: 16, color: textColor}]}>{item}</Text>
           <Text style={[styles.contentText, {fontSize: 12, margin: 0, color: textColor}]}>{People[item].title}</Text>

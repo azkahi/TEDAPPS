@@ -19,6 +19,7 @@ import {
 import TopBarNav from 'top-bar-nav';
 import { Button, Block, theme } from 'galio-framework';
 import axios from 'axios';
+import ModalSelector from 'react-native-modal-selector';
 
 import Card from '../components/Card';
 import Colors from '../constants/Colors';
@@ -30,6 +31,21 @@ import { loadFontAsync } from '../utils/helper';
 import { classesDay1, classesDay2 } from '../constants/Classes';
 
 const { width } = Dimensions.get('screen');
+
+const data_expertise = [
+  { key: 0, section: true, label: 'Background Education' },
+  { key: 1, label: 'UI/UX' },
+  { key: 2, label: 'Data Science' },
+  { key: 3, label: 'Others' },
+];
+
+const data_type = [
+  { key: 0, section: true, label: 'Type' },
+  { key: 1, label: 'Student' },
+  { key: 2, label: 'Employee' },
+  { key: 3, label: 'Community' },
+];
+
 
 export default class RegisterScreen extends React.Component {
   constructor(props) {
@@ -171,28 +187,34 @@ export default class RegisterScreen extends React.Component {
 
               <Text style={[styles.titleText, {fontSize: 20, marginTop: 20}]}>Type:</Text>
               <View style={{marginVertical: 10, height: 50, width: width - 40, backgroundColor: 'white' }}>
-                <Picker
-                  selectedValue={this.state.type}
-                  onValueChange={(itemValue, itemIndex) => this.setState({ type: itemValue })}
-                  style={{ height: 50, width: width - 40 }}>
-                  <Picker.Item label="" value="" />
-                  <Picker.Item label="Student" value="Student" />
-                  <Picker.Item label="Employee" value="Employee" />
-                  <Picker.Item label="Community" value="Community" />
-                </Picker>
+                <ModalSelector
+                    data={data_type}
+                    initValue="Select type"
+                    onChange={(option)=> { this.setState({ type: option.label }) }}>
+
+                    <TextInput
+                        style={{borderWidth:1, borderColor:'#ccc', padding:10, height:50}}
+                        editable={false}
+                        placeholder="Select type"
+                        value={this.state.type} />
+
+                </ModalSelector>
               </View>
 
               <Text style={[styles.titleText, {fontSize: 20, marginTop: 20}]}>Background Education:</Text>
               <View style={{marginVertical: 10, height: 50, width: width - 40, backgroundColor: 'white', marginBottom: 30 }}>
-                <Picker
-                  selectedValue={this.state.expertise}
-                  onValueChange={(itemValue, itemIndex) => this.setState({ expertise: itemValue })}
-                  style={{ height: 50, width: width - 40 }}>
-                  <Picker.Item label="" value="" />
-                  <Picker.Item label="UI/UX" value="UI/UX" />
-                  <Picker.Item label="Data Science" value="Data Science" />
-                  <Picker.Item label="Others" value="Others" />
-                </Picker>
+                <ModalSelector
+                    data={data_expertise}
+                    initValue="Select background education"
+                    onChange={(option)=> { this.setState({ expertise: option.label }) }}>
+
+                    <TextInput
+                        style={{borderWidth:1, borderColor:'#ccc', padding:10, height:50}}
+                        editable={false}
+                        placeholder="Select type"
+                        value={this.state.expertise} />
+
+                </ModalSelector>
               </View>
 
               {

@@ -201,7 +201,7 @@ export const classesDay2 = [
     key: 10,
     classBg: require('../assets/images/class1-bg.png'),
     title: 'Fast Forward to be Future People—Leading or left behind',
-    description: '',
+    description: 'Masa depan akan sangat berbeda dari yang kita lihat sekarang. 800 juta pekerja akan tergantikan oleh mesin. Teknologi tingkat seperti Artificial Intelligence, Robotika dan Machine Learning akan menjadi kebutuhan primer seperti hal nya listrik dan telepon. Di masa depan akan bermunculan pekerjaan yang kini bahkan belum muncul. Kemajuan teknologi memaksa kita semua untuk mampu mengejar jaman. Kendalilan teknologi sebelum teknologi mengendalikan kita. Untuk mampu mengikuti perkembangan teknologi kita perlu menguasai beberapa skill yang dibutuhkan di masa depan (future skill) yang disebut digital capability. Kita semua perlu menemukan future skill dan menguasainya sehingga dapat beradaptasi di era digital. Find your own digital capability!',
     moderator: [],
     moderatorTitle: [],
     speaker: ['Irfan A Tachrir'],
