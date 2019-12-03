@@ -47,7 +47,7 @@ export default class AuthLoadingScreen extends React.Component {
         <StatusBar hidden />
         <Image
           source={require('../assets/images/TEDAPPS-logo.png')}
-          resizeMode='center'
+          resizeMode='contain'
           style={{ alignSelf: 'center', height: 50, width: 200, marginBottom: 30 }}
         />
         <ActivityIndicator size="large" color={Colors.secondaryColor} />

@@ -50,7 +50,7 @@ export default class SpeakerScreen extends React.Component {
       <TouchableOpacity style={{ alignItems: 'center', marginBottom: 20, width: widthItem, paddingVertical: 10 }} onPress={() => this.goToPerson(item)}>
         <Image
           source={People[item].image}
-          resizeMode= 'center'
+          resizeMode= 'contain'
           style={styles.imagePerson}
         />
       <Text style={[styles.nameText]}>{item}</Text>

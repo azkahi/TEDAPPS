@@ -77,7 +77,7 @@ export default class HomeScreen extends React.Component {
     return (
       <Block flex style={styles.home}>
         <ScrollView>
-          { classList[index].map((classItem) => (<Card item={classItem} key={classItem.key} horizontal onPress={() => this.goToClassScreen(classItem)}/>)) }
+          { classList[index].map((classItem) => (<Card item={classItem} key={classItem.key} centered horizontal ctaDisabled onPress={() => this.goToClassScreen(classItem)}/>)) }
         </ScrollView>
       </Block>
     );

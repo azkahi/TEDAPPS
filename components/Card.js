@@ -54,7 +54,7 @@ class Card extends React.Component {
               { ctaDisabled ? null : <Text style={[styles.ctaStyle, item.textColorCta ? {color: item.textColorCta} : null, item.bgCta ? {backgroundColor: item.bgCta} : null]} bold>{item.cta}</Text> }
             </View>
             {
-              disabledImage ? <Image source={item.classImg} style={[styles.imageButton, { tintColor: 'gray', position: 'absolute', opacity: 0.5 }, ctaDisabled ? {height: 92} : null]} resizeMode='stretch' /> : null
+              disabledImage ? <Image source={item.classImg} style={[styles.imageButton, { tintColor: 'gray', position: 'absolute', opacity: 0.8 }, ctaDisabled ? {height: 92} : null]} resizeMode='stretch' /> : null
             }
           </TouchableOpacity>
           {/* <TouchableWithoutFeedback>

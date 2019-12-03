@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, ImageBackground, Dimensions, Text, Alert } from 'react-native';
+import { ScrollView, StyleSheet, View, ImageBackground, Dimensions, Text, Alert, RefreshControl } from 'react-native';
 import { Block, theme } from "galio-framework";
 import TopBarNav from 'top-bar-nav';
 import axios from 'axios';
@@ -30,6 +30,8 @@ export default class LeaderboardScreen extends React.Component {
   }
 
   getScoreData = async (type) => {
+    console.log('Getting Data');
+
     try {
       await axios({
         method: 'post',
@@ -72,6 +74,10 @@ export default class LeaderboardScreen extends React.Component {
     await this.getScoreData('UI/UX');
     await this.getScoreData('DS');
     this.setState({ loading: false });
+    this.interval = setInterval(() => {
+      this.getScoreData('UI/UX');
+      this.getScoreData('DS');
+    }, 30000);
   }
 
    renderScene = (index) => (
@@ -122,7 +128,7 @@ export default class LeaderboardScreen extends React.Component {
               />
           </View>
       }
-    </>
+      </>
     );
   }
 }

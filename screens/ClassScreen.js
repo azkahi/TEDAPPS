@@ -80,7 +80,7 @@ export default class ClassScreen extends React.Component {
         <TouchableOpacity style={{ alignItems: 'center', marginBottom: 20 }} onPress={() => this.goToPerson(item)}>
           <Image
             source={People[item].image}
-            resizeMode= 'center'
+            resizeMode= 'contain'
             style={{ width: 80, height: 80, borderRadius: 160 }}
           />
           <Text style={[styles.titleText, {fontSize: 16, color: textColor}]}>{item}</Text>
@@ -88,14 +88,16 @@ export default class ClassScreen extends React.Component {
         </TouchableOpacity>
       );
     } else {
-      <TouchableOpacity disabled style={{ alignItems: 'center', marginBottom: 20 }} onPress={() => this.goToPerson(item)}>
-        <Image
-          source={require('../assets/images/LogoTelkomsel.jpg')}
-          resizeMode= 'center'
-          style={{ width: 80, height: 80, borderRadius: 160 }}
-        />
-        <Text style={[styles.titleText, {fontSize: 16, color: textColor}]}>{item}</Text>
-      </TouchableOpacity>
+      return (
+        <TouchableOpacity disabled style={{ alignItems: 'center', marginBottom: 20 }} onPress={() => this.goToPerson(item)}>
+          <Image
+            source={require('../assets/images/LogoTelkomsel.jpg')}
+            resizeMode= 'contain'
+            style={{ width: 80, height: 80, borderRadius: 160 }}
+          />
+          <Text style={[styles.titleText, {fontSize: 16, color: textColor}]}>{item}</Text>
+        </TouchableOpacity>
+      );
     }
   }
 
@@ -109,7 +111,7 @@ export default class ClassScreen extends React.Component {
       return (
         <View style={styles.container}>
           <ScrollView style={styles.cardContainer} showsVerticalScrollIndicator={false} >
-            <Card item={classItem} key={classItem.key} horizontal disabled noMarginBottom />
+            <Card item={classItem} key={classItem.key} horizontal disabled ctaDisabled noMarginBottom />
             <View style={{alignItems: 'center'}}>
               <ImageBackground
                 source={classItem.classBg}
@@ -166,8 +168,9 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flex: 1,
-    height: 1000,
-    width: width - 60
+    marginTop: -22,
+    height: '100%',
+    width: width - 80
   },
   titleText: {
     fontFamily: 'UniviaPro-Bold',

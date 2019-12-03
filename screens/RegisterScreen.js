@@ -41,7 +41,8 @@ export default class RegisterScreen extends React.Component {
       email: '',
       phone: '',
       type: '',
-      expertise: ''
+      expertise: '',
+      study: ''
     };
   }
 
@@ -51,8 +52,9 @@ export default class RegisterScreen extends React.Component {
   }
 
   createUserRequest = async () => {
-    const { name, email, phone, type, expertise } = this.state;
-    const user = { name, email, phone, user_type: type, expertise };
+    const { name, email, phone, type, expertise, study } = this.state;
+    const user = { name, email, phone, user_type: type, expertise: expertise == 'Others' ? study : expertise };
+    console.log(user);
 
     try {
       await axios({
@@ -93,9 +95,20 @@ export default class RegisterScreen extends React.Component {
   }
 
   processInput() {
-    const { name, email, phone, type, expertise } = this.state;
+    const { name, email, phone, type, expertise, study } = this.state;
 
-    if (!name || !email || !phone || !type || !expertise) {
+    if (expertise == 'Others' && !study) {
+      console.log(study);
+      Alert.alert(
+        'All field must be filled.',
+        '',
+        [
+          { text: 'OK' },
+        ],
+        { cancelable: true }
+      );
+    } else if (!name || !email || !phone || !type || !expertise) {
+      console.log(study);
       Alert.alert(
         'All field must be filled.',
         '',
@@ -118,7 +131,7 @@ export default class RegisterScreen extends React.Component {
         <View style={styles.container}>
           <Image
             source={require('../assets/images/TEDAPPS-logo.png')}
-            resizeMode='center'
+            resizeMode='contain'
             style={{ alignSelf: 'center', height: 50, width: 200, marginTop: 50, marginBottom: 10 }}
           />
           <ScrollView>
@@ -160,7 +173,8 @@ export default class RegisterScreen extends React.Component {
               <View style={{marginVertical: 10, height: 50, width: width - 40, backgroundColor: 'white' }}>
                 <Picker
                   selectedValue={this.state.type}
-                  onValueChange={(itemValue, itemIndex) => this.setState({ type: itemValue })}>
+                  onValueChange={(itemValue, itemIndex) => this.setState({ type: itemValue })}
+                  style={{ height: 50, width: width - 40 }}>
                   <Picker.Item label="" value="" />
                   <Picker.Item label="Student" value="Student" />
                   <Picker.Item label="Employee" value="Employee" />
@@ -168,18 +182,36 @@ export default class RegisterScreen extends React.Component {
                 </Picker>
               </View>
 
-              <Text style={[styles.titleText, {fontSize: 20, marginTop: 20}]}>Expertise:</Text>
+              <Text style={[styles.titleText, {fontSize: 20, marginTop: 20}]}>Background Education:</Text>
               <View style={{marginVertical: 10, height: 50, width: width - 40, backgroundColor: 'white', marginBottom: 30 }}>
                 <Picker
                   selectedValue={this.state.expertise}
-                  onValueChange={(itemValue, itemIndex) => this.setState({ expertise: itemValue })}>
+                  onValueChange={(itemValue, itemIndex) => this.setState({ expertise: itemValue })}
+                  style={{ height: 50, width: width - 40 }}>
                   <Picker.Item label="" value="" />
                   <Picker.Item label="UI/UX" value="UI/UX" />
                   <Picker.Item label="Data Science" value="Data Science" />
-                  <Picker.Item label="Software Engineering" value="Software Engineering" />
                   <Picker.Item label="Others" value="Others" />
                 </Picker>
               </View>
+
+              {
+                this.state.expertise == "Others" ?
+                <>
+                  <Text style={[styles.titleText, {fontSize: 20, marginTop: -10}]}>Major Study:</Text>
+                  <View style={{marginVertical: 10, width: width - 40, backgroundColor: 'white', marginBottom: 30 }}>
+                    <TextInput
+                      style={{ height: 50, borderColor: Colors.primaryColor, borderBottomWidth: 1, paddingHorizontal: 10 }}
+                      onChangeText={text => this.setState({ study: text })}
+                      value={this.state.study}
+                      keyboardType='default'
+                    />
+                  </View>
+                </>
+                :
+                null
+              }
+
               <Button
                 style={styles.button}
                 color={Colors.secondaryColor}

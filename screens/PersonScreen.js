@@ -99,7 +99,7 @@ class PersonScreen extends React.Component {
                       <TouchableOpacity onPress={() => this.onPressImage()}>
                         <Image
                           source={People[personName].image}
-                          resizeMode= 'center'
+                          resizeMode='contain'
                           style={{ width: 80, height: 80, borderRadius: 160 }}
                         />
                       </TouchableOpacity>

@@ -78,13 +78,18 @@ export default class TEDCastScreen extends React.Component {
         <View style={styles.container}>
           <Image
             source={require('../assets/images/TEDCAST-logo.png')}
-            resizeMode='center'
+            resizeMode='contain'
             style={{ alignSelf: 'center', height: 50, width: 200, marginTop: 30, marginBottom: 10 }}
           />
           <ScrollView>
             <View style={{ marginHorizontal: 20, marginBottom: 5 }}>
               <Text style={styles.titleText}>TED Casting: Beat The 4.0</Text>
               <Text style={styles.contentText}>Sebagai bentuk implementasi rencana strategis New Capability Development, Telkomsel sebagai Leading Company dalam industri Digital & Telecomunication membuka kesempatan bagi Kalian yang ingin menjadi bagian dari THE PEOPLE 4.0 untuk bersama-sama mengakselerasikan pembangunan tenaga kerja Indonesia 4.0 yang berbasis pemanfaatan teknologi, khususnya pada bidang Data Science dan UI/UX.</Text>
+
+              <Text style={[styles.subText, {marginTop: 10}]}>Disclaimer:</Text>
+              <Text style={styles.subText}>For External Telkomsel:{'\n'}TED Casting merupakan salah satu kanal talent sourcing Telkomsel, kandidat potensial yang lolos TED Casting akan mendapatkan kesempatan mengikuti proses seleksi lebih lanjut untuk menjadi karyawan Telkomsel.</Text>
+              <Text style={styles.subText}>For Internal Telkomsel:{'\n'}TED Casting merupakan salah satu media seleksi untuk dapat mengikuti Data Science Academy Cohort 2 di Telkomsel, apabila anda lulus dalam seleksi ini ada akan mendapatkan Golden Ticket langsung ketahapan interview dan Untuk UI/UX anda akan mendapatkan Ticket Idea Fest 2020.</Text>
+
               <Text style={[styles.titleText, {textAlign: 'center'}]}>Are you ready to beat 4.0 with us?</Text>
               <Text style={[styles.titleText, {textAlign: 'center'}]}>Register yourself now!</Text>
 
@@ -93,7 +98,8 @@ export default class TEDCastScreen extends React.Component {
               <View style={{marginVertical: 10, height: 50, width: width - 40, backgroundColor: 'white' }}>
                 <Picker
                   selectedValue={this.state.expertise}
-                  onValueChange={(itemValue, itemIndex) => this.setState({ expertise: itemValue })}>
+                  onValueChange={(itemValue, itemIndex) => this.setState({ expertise: itemValue })}
+                  style={{ height: 50, width: width - 40 }}>
                   <Picker.Item label="" value="" />
                   <Picker.Item label="UI/UX" value="UI/UX" />
                   <Picker.Item label="Data Science" value="Data Science" />
@@ -108,10 +114,6 @@ export default class TEDCastScreen extends React.Component {
                 BEGIN!
               </Button>
 
-
-              <Text style={[styles.subText, {marginTop: 40}]}>Disclaimer:</Text>
-              <Text style={styles.subText}>For External Telkomsel:{'\n'}TED Casting merupakan salah satu kanal talent sourcing Telkomsel, kandidat potensial yang lolos TED Casting akan mendapatkan kesempatan mengikuti proses seleksi lebih lanjut untuk menjadi karyawan Telkomsel.</Text>
-              <Text style={styles.subText}>For Internal Telkomsel:{'\n'}TED Casting merupakan salah satu media seleksi untuk dapat mengikuti Data Science Academy Cohort 2 di Telkomsel, apabila anda lulus dalam seleksi ini ada akan mendapatkan Golden Ticket langsung ketahapan interview dan Untuk UI/UX anda akan mendapatkan Ticket Idea Fest 2020.</Text>
             </View>
           </ScrollView>
         </View>
@@ -176,7 +178,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 10,
-    marginBottom: 15
+    marginBottom: 5
   },
   buttonText: {
     color: 'white',

@@ -53,12 +53,12 @@ class VenueScreen extends React.Component {
           <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} onPress={() => this.onPressVenue()}>
               <Image
                 source={require("../assets/images/venue.jpg")}
-                resizeMode='center'
+                resizeMode='contain'
                 style={{ height: width * 7568 / 5528, width: width }}
               />
           </TouchableOpacity>
           <View>
-            <Text style={styles.titleText}>Tap to Enlarge</Text>
+            <Text style={styles.titleText}>Tap for More Detail</Text>
           </View>
           <ImageView
               images={images}
