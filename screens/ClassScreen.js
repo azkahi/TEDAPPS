@@ -93,7 +93,7 @@ export default class ClassScreen extends React.Component {
           <Image
             source={require('../assets/images/LogoTelkomsel.jpg')}
             resizeMode= 'contain'
-            style={{ width: 80, height: 80, borderRadius: 160 }}
+            style={{ width: 80, height: 80, marginVertical: 10 }}
           />
           <Text style={[styles.titleText, {fontSize: 16, color: textColor}]}>{item}</Text>
         </TouchableOpacity>

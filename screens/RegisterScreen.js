@@ -14,7 +14,8 @@ import {
   Picker,
   TextInput,
   Alert,
-  AsyncStorage
+  AsyncStorage,
+  KeyboardAvoidingView
 } from 'react-native';
 import TopBarNav from 'top-bar-nav';
 import { Button, Block, theme } from 'galio-framework';
@@ -150,8 +151,9 @@ export default class RegisterScreen extends React.Component {
             resizeMode='contain'
             style={{ alignSelf: 'center', height: 50, width: 200, marginTop: 50, marginBottom: 10 }}
           />
-          <ScrollView>
-            <View style={{ marginHorizontal: 20, marginBottom: 5 }}>
+
+        <KeyboardAvoidingView behavior='padding' enabled style={{ justifyContent: 'flex-end', flex: 1, marginHorizontal: 20, marginBottom: 5 }}>
+            <ScrollView>
               <Text style={[styles.titleText, {fontSize: 20, marginTop: 20}]}>Name:</Text>
               <View style={{marginVertical: 10, width: width - 40, backgroundColor: 'white' }}>
                 <TextInput
@@ -242,8 +244,8 @@ export default class RegisterScreen extends React.Component {
               >
                 Register
               </Button>
-            </View>
-          </ScrollView>
+            </ScrollView>
+          </KeyboardAvoidingView>
         </View>
       );
     }
