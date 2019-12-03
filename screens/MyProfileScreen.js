@@ -46,8 +46,21 @@ class MyProfile extends React.Component {
       loading: true,
       user: {},
       classes: [],
+      numClasses: 0,
       refreshing: false
     };
+  }
+
+  countClasses(classes) {
+    let tempClasses = [];
+
+    classes.map((classData) => {
+      if (tempClasses.indexOf(classData.key) == -1) {
+        tempClasses.push(classData.key);
+      }
+    });
+
+    this.setState({ numClasses: tempClasses.length });
   }
 
   async requestClassData(user) {
@@ -62,6 +75,7 @@ class MyProfile extends React.Component {
       })
       .then(async (response) => {
         console.log(response.data);
+        this.countClasses(response.data);
         this.setState({ loading: false, refreshing: false });
         this.setState({ classes: response.data });
       })
@@ -94,6 +108,8 @@ class MyProfile extends React.Component {
     await loadFontAsync();
 
     const user = JSON.parse(await AsyncStorage.getItem('user'));
+
+    console.log({ user });
 
     this.requestClassData(user);
 
@@ -132,7 +148,7 @@ class MyProfile extends React.Component {
   }
 
   render() {
-    const { user, classes, refreshing } = this.state;
+    const { user, classes, refreshing, numClasses } = this.state;
 
     if (this.state.loading) {
       return (<Loading />);
@@ -160,7 +176,7 @@ class MyProfile extends React.Component {
                     <Block middle style={{marginTop: 20}}>
                       <Block middle>
                         <Text style={{ fontFamily: 'UniviaPro-Bold', color: Colors.tintColor, fontSize: 16, marginBottom: 4 }}>
-                          {classes.length}
+                          {numClasses}
                         </Text>
                         <Text color={Colors.primaryColor} style={{ fontFamily: 'UniviaPro-Black', color: Colors.primaryColor, fontSize: 16 }} size={16}>Class Attended</Text>
                       </Block>

@@ -34,7 +34,7 @@ const { width, height } = Dimensions.get("screen");
 class PersonScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'Person',
+      title: 'Speaker',
       headerStyle: {
         backgroundColor: Colors.primaryColor,
         borderColor: Colors.tintColor,

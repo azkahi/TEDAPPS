@@ -139,21 +139,6 @@ export const classesDay1 = [
 
 export const classesDay2 = [
   {
-    key: 6,
-    classBg: require('../assets/images/class4-bg.png'),
-    title: 'Beating the Odds with Data Science',
-    description: 'Jargon ‘Data is the New Oil’ semakin nyata relevansinya dengan bisnis Digital Telco dan itu berhubungan erat dengan Data Science. Lalu apa itu Data Science? Bagaimana bisnis Data Science dalam skala global? Bagaimana implementasi Data Science dalam industri bisnis Telco? Mengapa talent Data Science saat ini masih langka? Simak jawabannya pada sesi ini yang akan menghadirkan Expert Data Science Global yaitu Wojtek Krok dari QuantumBlack – South East Asia.',
-    moderator: [],
-    moderatorTitle: [],
-    speaker: ['Wojtek Krok'],
-    speakerTitle: ['Leader of Quantum Black South-East Asia'],
-    classImg: require('../assets/images/class4.png'),
-    textColor: 'white',
-    bgCta: Colors.class3,
-    cta: 'Time: TBA',
-    horizontal: true
-  },
-  {
     key: 7,
     classBg: require('../assets/images/class3-bg.png'),
     title: 'Caster Academy & Studio Gaming Showcase',
@@ -181,6 +166,21 @@ export const classesDay2 = [
     textColor: 'white',
     textColorCta: Colors.primaryColor,
     bgCta: Colors.class1,
+    cta: 'Time: TBA',
+    horizontal: true
+  },
+  {
+    key: 6,
+    classBg: require('../assets/images/class4-bg.png'),
+    title: 'Beating the Odds with Data Science',
+    description: 'Jargon ‘Data is the New Oil’ semakin nyata relevansinya dengan bisnis Digital Telco dan itu berhubungan erat dengan Data Science. Lalu apa itu Data Science? Bagaimana bisnis Data Science dalam skala global? Bagaimana implementasi Data Science dalam industri bisnis Telco? Mengapa talent Data Science saat ini masih langka? Simak jawabannya pada sesi ini yang akan menghadirkan Expert Data Science Global yaitu Wojtek Krok dari QuantumBlack – South East Asia.',
+    moderator: [],
+    moderatorTitle: [],
+    speaker: ['Wojtek Krok'],
+    speakerTitle: ['Leader of Quantum Black South-East Asia'],
+    classImg: require('../assets/images/class4.png'),
+    textColor: 'white',
+    bgCta: Colors.class3,
     cta: 'Time: TBA',
     horizontal: true
   },
