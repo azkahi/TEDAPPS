@@ -12,8 +12,8 @@ const { width, height } = Dimensions.get("screen");
 import Loading from '../components/Loading';
 
 const ROUTESTACK = [
-  { element: <Text style={{ fontSize: 14, color: 'white', backgroundColor: Colors.secondaryColor, paddingHorizontal: 5 }}>Data Science</Text>, title: 'Scene' },
   { element: <Text style={{ fontSize: 14, color: 'white', backgroundColor: Colors.secondaryColor, paddingHorizontal: 5 }}>UI/UX</Text>, title: 'Scene' },
+  { element: <Text style={{ fontSize: 14, color: 'white', backgroundColor: Colors.secondaryColor, paddingHorizontal: 5 }}>Data Science</Text>, title: 'Scene' },
 ];
 
 export default class LeaderboardScreen extends React.Component {

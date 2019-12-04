@@ -169,7 +169,7 @@ class MyProfile extends React.Component {
             style={{zIndex: 2}}>
                 <View style={styles.profileCard}>
                     <Block middle style={styles.nameInfo}>
-                      <Text style={{fontFamily: 'UniviaPro-Bold', fontSize: 28, color: Colors.primaryColor}}>
+                      <Text style={{fontFamily: 'UniviaPro-Bold', fontSize: 28, textAlign: 'center', color: Colors.primaryColor}}>
                         {user.name}
                       </Text>
                     </Block>

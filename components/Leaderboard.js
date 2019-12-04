@@ -70,7 +70,7 @@ export default class Leaderboard extends Component {
               style={[styles.avatar, this.props.avatarStyle]}
             />
           )}
-          <Text style={[styles.label, this.props.labelStyle]} numberOfLines={1}>
+          <Text style={[styles.label, this.props.labelStyle]} ellipsizeMode='tail' numberOfLines={2}>
             {item[this.props.labelBy]}
           </Text>
         </View>
@@ -163,7 +163,8 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontFamily: 'UniviaPro-Black',
     flex: 1,
-    paddingRight: 80
+    textAlign: 'center',
+    marginRight: 170
   },
   score: {
     fontSize: 20,
