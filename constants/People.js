@@ -1,6 +1,6 @@
 export default {
   'Irfan A Tachrir': {
-    title: 'CHCO Telkomsel',
+    title: 'Director of HCM at Telkomsel',
     description: 'Irfan Ahadi Tachrir adalah Direktur Human Capital Management Telkomsel sejak periode tahun 2017. Lulusan Fakultas Hukum Universitas Padjadjaran ini lahir di Cilacap pada tahun 1967 dan mulai berkarya sejak tahun 2007 sebagai pejabat Legal & Compliance di Telkomsel. Irfan Ahadi Tachrir memiliki spesialisasi dalam bidang Human Capital Management, Legal & Regulatory, International Bussiness dan Change Management. Visi Irfan Ahadi Tachrir adalah “a mistake that makes you humble is better than an achievement that makes you arrogant”. Irfan Ahadi Tachrir mendapatkan penghargaan Satya Lencana Wirakarya dari Presiden RI pada tahun 2016 dan penghargaan Corporate Secretary of the Year pada tahun 2015 dari Majalah Swa. Selama menjabat sebagai CHCO Telkomsel, Irfan Ahadi Tachrir telah berhasil menelurkan program-program yang fokus pada pengembangan digital capability salah satunya Digital X, Telkomsel Next Gen Batch 1, Telkomsel Next Gen Batch 2 dan kini Transformational Expert Development (T.E.Dfest)',
     image: require('../assets/images/IrfanATachrir.jpg'),
   },

@@ -205,7 +205,7 @@ export const classesDay2 = [
     moderator: [],
     moderatorTitle: [],
     speaker: ['Irfan A Tachrir'],
-    speakerTitle: ['CHCO Telkomsel'],
+    speakerTitle: ['Director of HCM at Telkomsel'],
     classImg: require('../assets/images/class1.png'),
     cta: 'Time: TBA',
     horizontal: true

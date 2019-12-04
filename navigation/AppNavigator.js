@@ -5,6 +5,8 @@ import MainTabNavigator from './MainTabNavigator';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
+import LoginEmailScreen from '../screens/LoginEmailScreen';
+
 
 export default createAppContainer(
   createSwitchNavigator({
@@ -12,6 +14,7 @@ export default createAppContainer(
     // Read more at https://reactnavigation.org/docs/en/auth-flow.html
     AuthLoading: AuthLoadingScreen,
     Login: LoginScreen,
+    LoginEmail: LoginEmailScreen,
     Register: RegisterScreen,
     Main: MainTabNavigator,
   }, {

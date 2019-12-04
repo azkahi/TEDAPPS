@@ -120,6 +120,10 @@ class MyProfile extends React.Component {
     this.props.navigation.navigate('QRScanner');
   }
 
+  goToSurvey() {
+    this.props.navigation.navigate('Survey');
+  }
+
   onRefresh() {
     this.setState({ refreshing: true });
     this.requestClassData(this.state.user);
@@ -184,10 +188,14 @@ class MyProfile extends React.Component {
                     <Block middle style={{ marginTop: 20, marginBottom: 16 }}>
                       <Block style={styles.divider} />
                     </Block>
-                    <Block middle>
+                    <Block row middle style={{justifyContent: 'space-around'}}>
                       <TouchableOpacity style={styles.qrButton} onPress={() => this.goToScanQR()}>
                         <Image style={styles.qrButtonImage} source={require('../assets/images/qr-code.png')}/>
                         <Text color={Colors.primaryColor} style={styles.qrButtonText}>Scan QR</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity style={styles.qrButton} onPress={() => this.goToSurvey()}>
+                        <Image style={styles.qrButtonImage} source={require('../assets/images/survey.png')}/>
+                        <Text color={Colors.primaryColor} style={styles.qrButtonText}>Survey</Text>
                       </TouchableOpacity>
                     </Block>
                     <Block middle style={{ marginTop: 20, marginBottom: 16 }}>

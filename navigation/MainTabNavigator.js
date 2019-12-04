@@ -14,6 +14,7 @@ import VenueScreen from '../screens/VenueScreen';
 import ClassScreen from '../screens/ClassScreen';
 import PersonScreen from '../screens/PersonScreen';
 import TEDCastScreen from '../screens/TEDCastScreen';
+import SurveyScreen from '../screens/SurveyScreen';
 
 
 const config = Platform.select({
@@ -81,7 +82,8 @@ MyProfileStack.path = '';
 const SpeakerStack = createStackNavigator(
   {
     Speaker: SpeakerScreen,
-    Person: PersonScreen
+    Person: PersonScreen,
+    Survey: SurveyScreen
   },
   config
 );

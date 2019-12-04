@@ -38,6 +38,10 @@ export default class LoginScreen extends React.Component {
     this.props.navigation.navigate('Register');
   }
 
+  goToLoginEmail = () => {
+    this.props.navigation.navigate('LoginEmail');
+  }
+
   render() {
     const { navigation } = this.props;
 
@@ -83,6 +87,14 @@ export default class LoginScreen extends React.Component {
                   >
                     Get Started
                   </Button>
+                  <Button
+                    style={styles.button}
+                    color={Colors.secondaryColor}
+                    onPress={() => this.goToLoginEmail()}
+                    textStyle={[styles.buttonText, {fontSize: 12}]}
+                  >
+                    Login with previously registered e-mail
+                  </Button>
                 </Block>
             </Block>
           </Block>
@@ -106,7 +118,8 @@ const styles = StyleSheet.create({
     width: width - theme.SIZES.BASE * 4,
     height: theme.SIZES.BASE * 3,
     shadowRadius: 5,
-    shadowOpacity: 0
+    shadowOpacity: 0,
+    marginVertical: 10
   },
   buttonText: {
     color: 'white',
